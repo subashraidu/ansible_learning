@@ -80,6 +80,7 @@ Ansible is written in Python, and it relies on Python for executing its core fun
 Installation of Ansible:
 The installation method depends on your operating systems:
 for Ubuntu: sudo apt install ansible -y
+	  : ansible --version
 
 
 
