@@ -99,6 +99,8 @@ Common Modules in Tasks
         shell: Run shell commands
 		
 for learning about modules refer: https://docs.ansible.com/ansible/latest/collections/ansible/builtin/index.html
+
+to run the playbook use: ansible-playbook -i inventory.ini firstplaybook.yaml
   
   
   
