@@ -1,0 +1,105 @@
+playbook is a list of plays
+
+---
+-[write a play]
+
+-[write a play]
+
+In this example, the first play targets the web servers; the second play targets the database servers.
+
+---
+- name: Update web servers
+  hosts: webservers
+  remote_user: root
+
+  tasks:
+  - name: Ensure apache is at the latest version
+    ansible.builtin.yum:
+      name: httpd
+      state: latest
+
+  - name: Write the apache config file
+    ansible.builtin.template:
+      src: /srv/httpd.j2
+      dest: /etc/httpd.conf
+
+- name: Update db servers
+  hosts: databases
+  remote_user: root
+
+  tasks:
+  - name: Ensure postgresql is at the latest version
+    ansible.builtin.yum:
+      name: postgresql
+      state: latest
+
+  - name: Ensure that postgresql is started
+    ansible.builtin.service:
+      name: postgresql
+      state: started
+	  
+
+Tasks:
+
+In an Ansible playbook, tasks are the core part where you define the actions that Ansible should perform on the target hosts. Each task describes a specific operation, like installing software, copying files, managing services, or configuring settings.
+
+tasks:
+  - name: Install NGINX
+    apt:
+      name: nginx
+      state: present
+	  
+name: (Optional but recommended): A description of what the task does.
+Module Name (apt in this case): Defines what Ansible should do.
+Module Arguments: Specify details like the package name, state, etc.
+
+
+Common Modules in Tasks
+
+    Package Management:
+
+        apt (for Debian/Ubuntu)
+
+        yum (for RHEL/CentOS)
+
+        dnf (for newer Fedora/RHEL)
+
+        pip (for Python packages)
+
+    File and Directory Management:
+
+        copy: Copy files
+
+        template: Render Jinja2 templates
+
+        file: Manage file permissions and properties
+
+    Service Management:
+
+        service: Start, stop, or restart services
+
+        systemd: Manage systemd services
+
+    User and Group Management:
+
+        user: Add, remove, or modify users
+
+        group: Manage groups
+
+    Networking:
+
+        firewalld: Manage firewall rules
+
+        ufw: Manage UFW firewall
+
+    System Commands:
+
+        command: Run commands
+
+        shell: Run shell commands
+		
+for learning about modules refer: https://docs.ansible.com/ansible/latest/collections/ansible/builtin/index.html
+  
+  
+  
+
