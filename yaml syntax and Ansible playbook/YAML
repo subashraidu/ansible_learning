@@ -35,4 +35,20 @@ employees:
     role: Developer
   - name: Carol
     role: Designer	
+
+In YAML, the three hyphens (---) at the beginning of a playbook or any YAML file are used to indicate the start of a new document. If you’re working with multiple documents in one file (like combining different configurations), the --- separator becomes even more useful:
+
+---
+- name: First play
+  hosts: all
+  tasks:
+    - debug: msg="This is the first play."
+
+---
+- name: Second play
+  hosts: db_servers
+  tasks:
+    - debug: msg="This is the second play."
+
+
 	
