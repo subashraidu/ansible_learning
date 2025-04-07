@@ -1,1 +1,38 @@
+YAML ((YAML Ain't Markup Language))
 
+YAML is a human-readable data serialization format commonly used for:
+Configuration files (e.g., Docker, Kubernetes, Ansible)
+Data exchange between languages with different data structures
+Automation scripts
+
+Syntax:
+
+1. Key-Value Pairs
+
+name: John Doe
+age: 30
+is_student: false
+
+2. Lists (Arrays)
+fruits:
+  - Apple
+  - Banana
+  - Cherry
+  
+3. Nested Data (Using Indentation)
+Use 2 spaces for indentation (no tabs!). Nested data refers to data structures where one data element (like a list or a dictionary) is contained within another. In YAML, this often means dictionaries inside dictionaries or lists inside dictionaries, and vice versa.
+
+person:
+  name: Alice
+  details:
+    age: 25
+    city: New York
+	
+4. Mixing Dictionaries and Lists
+
+employees:
+  - name: Bob
+    role: Developer
+  - name: Carol
+    role: Designer	
+	
