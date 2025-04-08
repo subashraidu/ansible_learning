@@ -17,9 +17,8 @@ Share Your Work: Publish your own roles/collections for others to use.
 example: ansible-galaxy install geerlingguy.nginx
 
 ls ~/.ansible/roles
- list the contents of the roles directory inside the .ansible (all locally installed Ansible roles are stored here)
- 
- ~: Refers to your home directory (e.g., /home/username or /Users/username).
+list the contents of the roles directory inside the .ansible (all locally installed Ansible roles are stored here)
+~: Refers to your home directory (e.g., /home/username or /Users/username).
 .ansible/roles: This is the folder where Ansible stores locally installed roles (unless configured otherwise).
 
 firstplaybook_galaxy.yaml
@@ -31,3 +30,23 @@ firstplaybook_galaxy.yaml
 
 
 command to run : <ansible-playbook -i inventory.ini firstplaybook_galaxy.yaml>
+
+
+# How to push ansible role created in local to ansible galxy.
+1. push the role to github.
+2. push to ansible-galaxy
+
+#Push Your Role to GitHub
+cd <role-name>
+git init
+git remote add origin <https://github.com/your_github_username/my_role.git>
+git add .
+git commit -m "Initial commit"
+git push -u origin main
+
+#role published to git hub repository
+command to push to ansible galaxy: ansible-galaxy import <github username> <name of repository> --token
+
+
+
+
