@@ -1,0 +1,33 @@
+# Ansible Galaxy vs. Docker Hub
+
+Feature	| Ansible Galaxy	| Docker Hub
+Purpose:	Repository for Ansible roles & collections	| Repository for Docker images
+Content:	Roles, collections, playbooks, plugins	| Container images, including OS, apps, services
+Usage:	Install automation code (e.g., ansible-galaxy install)	| Pull container images (e.g., docker pull)
+Versioning:	Supports version control for roles	| Supports image tagging and versioning
+Source:	Community contributions & private content	|Official images + community contributions
+Example:	ansible-galaxy install geerlingguy.nginx	| docker pull nginx:latest
+
+
+#How It Works in Ansible Galaxy:
+Find Roles/Collections: Search for reusable Ansible content (e.g., nginx, mysql, docker).
+Install Content: Use ansible-galaxy install to download roles or collections into your environment.
+Share Your Work: Publish your own roles/collections for others to use.
+
+example: ansible-galaxy install geerlingguy.nginx
+
+ls ~/.ansible/roles
+ list the contents of the roles directory inside the .ansible (all locally installed Ansible roles are stored here)
+ 
+ ~: Refers to your home directory (e.g., /home/username or /Users/username).
+.ansible/roles: This is the folder where Ansible stores locally installed roles (unless configured otherwise).
+
+firstplaybook_galaxy.yaml
+---
+- hosts: all
+  become: true
+  roles:
+    - geerlingguy.docker
+
+
+command to run : <ansible-playbook -i inventory.ini firstplaybook_galaxy.yaml>
