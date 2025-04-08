@@ -60,3 +60,50 @@ Collaboration: Roles facilitate collaboration among team members by allowing the
 Consistency: Using roles ensures that the same setup and configuration procedures are applied uniformly across multiple environments, reducing the risk of configuration drift.
 
 
+
+1. for roles do the user need to create folder every time : ansible can create the entire structure by running ansible-galaxy role init <name of role>
+2. roles required to simplify yaml file for complex tasks such as installing kubernetes. Using this roles we can share or upload this into ansible galaxy (similar to docker hub)
+3. templates and files are almost simular when you have dynamic files 
+4. ansible follows jinja teplating standard ,My name is {{ ansible_facts[ 'hostname' ] }}
+
+- hosts: webservers
+  become: true
+  vars:
+    nginx_port: 8080
+    server_name: example.com
+  tasks:
+    - name: Deploy Nginx configuration
+      template:
+        src: nginx.conf.j2
+        dest: /etc/nginx/sites-available/example
+      notify:
+        - Reload Nginx
+
+  handlers:
+    - name: Reload Nginx
+      service:
+        name: nginx
+        state: reloaded
+
+
+server {
+    listen {{ nginx_port }};
+    server_name {{ server_name }};
+
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+}
+
+
+Variables (nginx_port, server_name) are passed from the playbook.
+Jinja2 Syntax like {{ nginx_port }} is used to insert values dynamically.
+The template file (nginx.conf.j2) is rendered and placed at /etc/nginx/sites-available/example.
+
+5. insted of writing your EC2 instance host name directly as it will be changing , you can passs variables into the template files which makes the template files dynamic , where enteries of the file can be modified in the ansible play book
+6. defaults are also variables, that means if you are not providing any value to the variables that you have created , it it can take the value by default present in the default/main.yaml 
+7. handlesrs are ansible tasks which you want to execute apon a particular action like restarts, which can be called multiple times  
+8. command used to run the playbook <ansible-playbook -i inventory.ini firstplaybook.yaml>
+
